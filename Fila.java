@@ -1,7 +1,7 @@
 public class Fila <E>{
 	private Celula<E> inicio;
 	private Celula<E> fim;
-	private final int TAMANHO = 10;
+
 
 	public Fila(E dado){
 		inicio = new Celula<E>(dado);
@@ -31,7 +31,7 @@ public class Fila <E>{
 
 	public int buscar(E dado){
 		Celula<E> atual = fim;
-		int index = (this.TAMANHO-1);
+		int index = 0;
 
 		while(atual != null){
 			if(atual.getDado().equals(dado)){
@@ -39,7 +39,7 @@ public class Fila <E>{
 			}
 
 			atual = atual.getAnterior();
-			index--;
+			index++;
 		}
 
 		return index;
