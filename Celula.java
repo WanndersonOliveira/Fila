@@ -1,18 +1,18 @@
 public class Celula<E>{
 	private E dado;
-	private Celula anterior;
+	private Celula posterior;
 
 	public Celula(E dado){
 		this.dado = dado;
-		this.anterior = null;
+		this.posterior = null;
 	}
 
-	public Celula getAnterior(){
-		return this.anterior;
+	public Celula getPosterior(){
+		return this.posterior;
 	}
 
-	public void setAnterior(Celula anterior){
-		this.anterior = anterior;
+	public void setPosterior(Celula posterior){
+		this.posterior = posterior;
 	}
 
 	public E getDado(){

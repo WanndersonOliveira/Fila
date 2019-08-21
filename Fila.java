@@ -1,59 +1,69 @@
 public class Fila <E>{
 	private Celula<E> inicio;
 	private Celula<E> fim;
+	private int size;
 
 
 	public Fila(E dado){
 		inicio = new Celula<E>(dado);
 		fim = inicio;
+		this.size = 1;
 	}
 
-	public void push(E dado){
+	public void enqueue(E dado){
 		Celula<E> novo = new Celula<E>(dado);
-		novo.setAnterior(fim);
+		fim.setPosterior(novo);
 		fim = novo;
+		this.size++;
 	}
 
-	public Celula pop(){
+	public Celula dequeue(){
 		Celula<E> atual = fim;
 		Celula<E> velho = inicio;
 
-		while(atual.getAnterior().getAnterior() != null){
-			atual = atual.getAnterior();
+		if(isEmpty()){
+				throw new ErroFilaVazia("enqueue() -> A fila está vazia!");
 		}
 
-		atual.setAnterior(null);
-		inicio = atual;
-		Celula<E> retorno = new Celula<E>(velho.getDado());
-		velho = null;
+		inicio = inicio.getPosterior();
+
+		velho.setPosterior(null);
+
+		Celula<E> retorno = velho;
+		this.size--;
 		return retorno;
 	}
 
-	public int buscar(E dado){
-		Celula<E> atual = fim;
-		int index = 0;
+	public boolean isEmpty(){
+		boolean check = false;
 
-		while(atual != null){
-			if(atual.getDado().equals(dado)){
-				break;
-			}
-
-			atual = atual.getAnterior();
-			index++;
+		if(this.size == 0){
+			check = true;
 		}
 
-		return index;
+		return check;
 	}
 
+	public Celula top(){
+		if(isEmpty()){
+				throw new ErroFilaVazia("top() -> A fila está vazia!");
+		}
+
+		return this.inicio;
+	}
+
+
+
+
 	public void mostrar(){
-		Celula<E> atual = fim;
+		Celula<E> atual = inicio;
 
 		while(atual != null){
 			System.out.println(atual.getDado());
 
-			atual = atual.getAnterior();
+			atual = atual.getPosterior();
 		}
 	}
 
 
-}	
+}
